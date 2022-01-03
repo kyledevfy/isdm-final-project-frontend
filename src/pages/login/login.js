@@ -3,7 +3,7 @@ import React from "react";
 const Login = () => {
   return (
     <div className="h-screen flex">
-      <div className="flex w-1/2 bg-gradient-to-tr from-blue-800 to-purple-700 i justify-around items-center">
+      <div className="flex w-1/2 bg-gradient-to-tr from-cyan-400 via-cyan-500 to-cyan-600 i justify-around items-center">
         <div>
           <h1 className="text-white font-bold text-4xl font-sans">
             Cagayan Educational Supply
@@ -40,7 +40,7 @@ const Login = () => {
               placeholder="Email Address"
             />
           </div>
-          <div className="flex items-center border-2 py-2 px-3 rounded-md">
+          <div className="flex items-center border-2 py-2 px-3 rounded-md mb-4">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5 text-gray-400"
@@ -63,10 +63,11 @@ const Login = () => {
           </div>
           <button
             type="submit"
-            className="block w-full bg-indigo-600 mt-4 py-2 rounded-md text-white font-semibold mb-2"
+            class="text-white w-full bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-md px-5 py-2.5 text-center mr-2 mb-2"
           >
             Login
           </button>
+
           <span className="text-sm ml-2 hover:text-blue-500 cursor-pointer">
             Forgot Password ?
           </span>
