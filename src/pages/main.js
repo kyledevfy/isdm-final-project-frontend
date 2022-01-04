@@ -9,11 +9,7 @@ const Main = () => {
     <div className="main">
       <Routes>
         <Route exact path="/" element={<Home />} />
-      </Routes>
-      <Routes>
         <Route exact path="/login" element={<Login />} />
-      </Routes>
-      <Routes>
         <Route exact path="/employees" element={<Employees />} />
       </Routes>
     </div>

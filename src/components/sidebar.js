@@ -6,55 +6,68 @@ import {
   BsGearFill,
 } from "react-icons/bs";
 import { MdLogout } from "react-icons/md";
+import { useLocation, NavLink } from "react-router-dom";
 
 const Sidebar = () => {
+  var currentRoute = useLocation().pathname;
+  console.log(currentRoute);
   return (
-    <div className="sidebar absolute -left-64 lg:left-0 flex flex-col w-64 h-screen px-4 py-8 bg-white border-r">
+    <div className="sidebar fixed -left-64 lg:left-0 flex flex-col w-64 h-screen min-h-screen px-4 py-8 bg-white border-r">
       <h2 className="text-3xl text-center font-bold font-nunito text-cyan-600 mb-4">
         Cagayan Educational Supply
       </h2>
-      <div className="flex flex-col justify-between flex-1 mt-6">
+      <div className="flex flex-col justify-between flex-1 mt-6 overflow-y-auto">
         <nav>
-          <a
-            className="flex items-center px-4 py-2 text-gray-600 transition-colors duration-200 transform rounded-md hover:bg-gray-200 hover:text-gray-700"
-            href="/"
+          <NavLink
+            className={`flex items-center px-4 py-2 text-gray-600 transition-colors duration-200 transform rounded-md hover:bg-gray-200 hover:text-gray-700 ${
+              currentRoute === "/" ? "bg-gray-200" : ""
+            }`}
+            to="/"
           >
             <BsFillGrid1X2Fill size={18} className="text-cyan-600" />
             <span className="mx-4 font-medium">Home</span>
-          </a>
+          </NavLink>
 
-          <a
-            className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-200 transform rounded-md hover:bg-gray-200 hover:text-gray-700"
-            href="/employees"
+          <NavLink
+            className={`flex items-center px-4 py-2 text-gray-600 transition-colors duration-200 transform rounded-md hover:bg-gray-200 hover:text-gray-700 ${
+              currentRoute === "/employees" ? "bg-gray-200" : ""
+            }`}
+            to="/employees"
           >
             <BsFillPersonFill size={18} className="text-cyan-600" />
             <span className="mx-4 font-medium">Empoloyees</span>
-          </a>
+          </NavLink>
 
-          <a
-            className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-200 transform rounded-md hover:bg-gray-200 hover:text-gray-700"
-            href="#"
+          <NavLink
+            className={`flex items-center px-4 py-2 text-gray-600 transition-colors duration-200 transform rounded-md hover:bg-gray-200 hover:text-gray-700 ${
+              currentRoute === "/attendance" ? "bg-gray-200" : ""
+            }`}
+            to="#"
           >
             <BsFillFileEarmarkTextFill size={18} className="text-cyan-600" />
 
             <span className="mx-4 font-medium">Attendance</span>
-          </a>
+          </NavLink>
 
-          <a
-            className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-200 transform rounded-md hover:bg-gray-200 hover:text-gray-700"
-            href="#"
+          <NavLink
+            className={`flex items-center px-4 py-2 text-gray-600 transition-colors duration-200 transform rounded-md hover:bg-gray-200 hover:text-gray-700 ${
+              currentRoute === "/settings" ? "bg-gray-200" : ""
+            }`}
+            to="#"
           >
             <BsGearFill size={18} className="text-cyan-600" />
 
             <span className="mx-4 font-medium">Settings</span>
-          </a>
+          </NavLink>
 
           <hr className="my-6 border-gray-200" />
         </nav>
-        <div className="flex items-center cursor-pointer px-4 py-2 transition-colors duration-200 transform rounded-md text-red-500 hover:bg-gray-200 hover:text-red-600">
-          <MdLogout size={22} />
-          <h4 className="ml-2 mr-6 font-medium">Logout</h4>
-        </div>
+        <NavLink to="/login">
+          <div className="flex items-center cursor-pointer px-4 py-2 transition-colors duration-200 transform rounded-md text-red-500 hover:bg-gray-200 hover:text-red-600">
+            <MdLogout size={22} />
+            <h4 className="ml-2 mr-6 font-medium">Logout</h4>
+          </div>
+        </NavLink>
       </div>
     </div>
   );

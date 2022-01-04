@@ -2,8 +2,9 @@ import React from "react";
 import { MdAccountCircle } from "react-icons/md";
 
 const Header = ({ headerTitle }) => {
+  var sidebarActive = false;
   return (
-    <div className="header bg-white border-b flex justify-between items-center px-5 py-4">
+    <div className="header bg-white border-b flex justify-between items-center px-5 py-4 fixed inset-x-0 lg:left-64">
       <div className="header-title">
         <h1 className="text-2xl text-cyan-600 font-bold font-nunito">
           {headerTitle}
