@@ -5,19 +5,19 @@ import {
   BsFillFileEarmarkTextFill,
   BsGearFill,
 } from "react-icons/bs";
-import { MdAccountCircle } from "react-icons/md";
+import { MdLogout } from "react-icons/md";
 
 const Sidebar = () => {
   return (
     <div className="sidebar absolute -left-64 lg:left-0 flex flex-col w-64 h-screen px-4 py-8 bg-white border-r">
-      <h2 className="text-3xl text-center font-semibold text-cyan-600 mb-4">
+      <h2 className="text-3xl text-center font-bold font-nunito text-cyan-600 mb-4">
         Cagayan Educational Supply
       </h2>
       <div className="flex flex-col justify-between flex-1 mt-6">
         <nav>
           <a
-            className="flex items-center px-4 py-2 text-gray-700 bg-gray-200 rounded-md"
-            href="#"
+            className="flex items-center px-4 py-2 text-gray-600 transition-colors duration-200 transform rounded-md hover:bg-gray-200 hover:text-gray-700"
+            href="/"
           >
             <BsFillGrid1X2Fill size={18} className="text-cyan-600" />
             <span className="mx-4 font-medium">Home</span>
@@ -25,7 +25,7 @@ const Sidebar = () => {
 
           <a
             className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-200 transform rounded-md hover:bg-gray-200 hover:text-gray-700"
-            href="#"
+            href="/employees"
           >
             <BsFillPersonFill size={18} className="text-cyan-600" />
             <span className="mx-4 font-medium">Empoloyees</span>
@@ -51,12 +51,9 @@ const Sidebar = () => {
 
           <hr className="my-6 border-gray-200" />
         </nav>
-
-        <div className="flex items-center px-4 -mx-2">
-          <MdAccountCircle size={28} className="text-cyan-600" />
-          <h4 className="mx-2 font-medium text-gray-800 hover:underline">
-            John Doe
-          </h4>
+        <div className="flex items-center cursor-pointer px-4 py-2 transition-colors duration-200 transform rounded-md text-red-500 hover:bg-gray-200 hover:text-red-600">
+          <MdLogout size={22} />
+          <h4 className="ml-2 mr-6 font-medium">Logout</h4>
         </div>
       </div>
     </div>
