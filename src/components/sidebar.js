@@ -10,7 +10,6 @@ import { useLocation, NavLink } from "react-router-dom";
 
 const Sidebar = (props) => {
   var currentRoute = useLocation().pathname;
-  console.log(currentRoute);
   return (
     <div
       className={`sidebar fixed ${

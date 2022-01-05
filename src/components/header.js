@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { MdAccountCircle, MdMenu, MdClose } from "react-icons/md";
 
 const Header = (props) => {
+  // Window resize listener
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) {
+        props.setSidebarActive(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+  });
+  // Menu clicked
   const hamburgerClicked = () => {
     props.setSidebarActive(!props.sidebarActive);
   };

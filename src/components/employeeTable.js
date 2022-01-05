@@ -1,6 +1,6 @@
 import React from "react";
 
-const EmployeeTable = () => {
+const EmployeeTable = (props) => {
   return (
     <div className="flex flex-col">
       <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -53,7 +53,11 @@ const EmployeeTable = () => {
                     Active
                   </td>
                   <td className="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
-                    <a href="#" className="text-blue-600 hover:text-blue-900">
+                    <a
+                      href="#"
+                      className="text-blue-600 hover:text-blue-900"
+                      onClick={() => props.setToggleEditModal(true)}
+                    >
                       Edit
                     </a>
                   </td>
