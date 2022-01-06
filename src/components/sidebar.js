@@ -33,7 +33,10 @@ const Sidebar = (props) => {
 
           <NavLink
             className={`flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-200 transform rounded-md hover:bg-gray-200 hover:text-gray-700 ${
-              currentRoute === "/employees" ? "bg-gray-200" : ""
+              currentRoute === "/employees" ||
+              currentRoute === "/employees/inactive"
+                ? "bg-gray-200"
+                : ""
             }`}
             to="/employees"
           >
