@@ -1,7 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
-const AttendanceTable = (props) => {
+const IndividualAttendanceTable = (props) => {
   return (
     <div className="flex flex-col">
       <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -40,9 +39,6 @@ const AttendanceTable = (props) => {
                   >
                     Date
                   </th>
-                  <th scope="col" className="relative py-3 px-6">
-                    <span className="sr-only">Edit</span>
-                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -62,14 +58,6 @@ const AttendanceTable = (props) => {
                   <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap">
                     2021-01-02
                   </td>
-                  <td className="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
-                    <Link
-                      to="/attendance/individual"
-                      className="text-blue-600 hover:text-blue-900"
-                    >
-                      Open
-                    </Link>
-                  </td>
                 </tr>
                 <tr className="bg-gray-50 border-b">
                   <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
@@ -86,14 +74,6 @@ const AttendanceTable = (props) => {
                   </td>
                   <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap">
                     2021-01-02
-                  </td>
-                  <td className="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
-                    <Link
-                      to="/attendance/individual"
-                      className="text-blue-600 hover:text-blue-900"
-                    >
-                      Open
-                    </Link>
                   </td>
                 </tr>
                 <tr className="bg-white border-b">
@@ -112,14 +92,6 @@ const AttendanceTable = (props) => {
                   <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap">
                     2021-01-02
                   </td>
-                  <td className="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
-                    <Link
-                      to="/attendance/individual"
-                      className="text-blue-600 hover:text-blue-900"
-                    >
-                      Open
-                    </Link>
-                  </td>
                 </tr>
               </tbody>
             </table>
@@ -130,4 +102,4 @@ const AttendanceTable = (props) => {
   );
 };
 
-export default AttendanceTable;
+export default IndividualAttendanceTable;

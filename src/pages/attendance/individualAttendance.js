@@ -1,11 +1,11 @@
 import React from "react";
-import AttendanceDatepicker from "../../components/attendanceDatepicker";
-import AttendanceTable from "../../components/attendanceTable";
 import Header from "../../components/header";
+import IndividualAttendanceTable from "../../components/individualAttendanceTable";
 import Sidebar from "../../components/sidebar";
+import { MdKeyboardBackspace } from "react-icons/md";
 import { Link } from "react-router-dom";
 
-const Attendance = (props) => {
+const IndividualAttendance = (props) => {
   return (
     <div className="attendance relative min-h-screen bg-gray-100 overflow-x-hidden">
       <Sidebar
@@ -18,22 +18,22 @@ const Attendance = (props) => {
         } lg:pl-64`}
       >
         <Header
-          headerTitle={"Attendance"}
+          headerTitle={"Attendance / CES20210001"}
           sidebarActive={props.sidebarActive}
           setSidebarActive={props.setSidebarActive}
         />
         <div className="attendance-content pt-20 px-5 font-nunito">
-          <div className="flex justify-end items-center py-2">
-            <span className="text-gray-600 mr-3 text-lg">
-              Select Date Range:{" "}
-            </span>
-            <AttendanceDatepicker />
-          </div>
-          <AttendanceTable />
+          <Link to={"/attendance"}>
+            <MdKeyboardBackspace
+              size={28}
+              className="text-cyan-600 font-bold hover:text-cyan-700"
+            />
+          </Link>
+          <IndividualAttendanceTable />
         </div>
       </div>
     </div>
   );
 };
 
-export default Attendance;
+export default IndividualAttendance;
