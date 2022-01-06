@@ -185,7 +185,7 @@ const EditEmployeeModal = (props) => {
               type="submit"
               className="text-white w-full flex justify-center font-bold items-center bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br rounded-lg text-lg px-3 py-2 text-center"
             >
-              Add
+              Edit
             </button>
           </form>
         </div>

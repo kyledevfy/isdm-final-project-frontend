@@ -6,6 +6,7 @@ import Employees from "./employees/employees";
 import InactiveEmployees from "./employees/inactiveEmployees";
 import Home from "./home/home";
 import Login from "./login/login";
+import Settings from "./settings/settings";
 
 const Main = () => {
   const [sidebarActive, setSidebarActive] = useState(true);
@@ -58,6 +59,16 @@ const Main = () => {
           path="/attendance/individual"
           element={
             <IndividualAttendance
+              sidebarActive={sidebarActive}
+              setSidebarActive={setSidebarActive}
+            />
+          }
+        />
+        <Route
+          exact
+          path="/settings"
+          element={
+            <Settings
               sidebarActive={sidebarActive}
               setSidebarActive={setSidebarActive}
             />
