@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
+import Attendance from "./attendance/attendance";
 import Employees from "./employees/employees";
 import InactiveEmployees from "./employees/inactiveEmployees";
 import Home from "./home/home";
@@ -36,6 +37,16 @@ const Main = () => {
           path="/employees/inactive"
           element={
             <InactiveEmployees
+              sidebarActive={sidebarActive}
+              setSidebarActive={setSidebarActive}
+            />
+          }
+        />
+        <Route
+          exact
+          path="/attendance"
+          element={
+            <Attendance
               sidebarActive={sidebarActive}
               setSidebarActive={setSidebarActive}
             />

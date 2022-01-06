@@ -3,7 +3,8 @@
 
 .sidebar,
 .header,
-.employees-body {
+.employees-body,
+.attendance-body {
   transition: 0.3s ease-in-out;
 }
 

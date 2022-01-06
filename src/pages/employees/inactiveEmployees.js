@@ -31,7 +31,7 @@ const InactiveEmployees = (props) => {
           <div className="undo-arrow flex justify-start items-center py-1.5">
             <Link to={"/employees"}>
               <MdKeyboardBackspace
-                size={30}
+                size={28}
                 className="text-cyan-600 font-bold hover:text-cyan-700"
               />
             </Link>
