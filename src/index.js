@@ -3,10 +3,23 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import { configureStore } from "@reduxjs/toolkit";
+import { Provider } from "react-redux";
+import userReducer from "./state/user";
+import loginStatusReducer from "./state/loginStatus";
+
+const store = configureStore({
+  reducer: {
+    user: userReducer,
+    loginStatus: loginStatusReducer,
+  },
+});
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );

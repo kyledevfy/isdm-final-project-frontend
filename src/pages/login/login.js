@@ -1,10 +1,33 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { userLogin } from "../../services/auth";
+import { login } from "../../state/user";
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const loginStat = useSelector((state) => state.loginStatus.value);
+
+  // User Login
+  const loginUser = async () => {
+    const response = await userLogin("kyletimajo@gmail.com", "jboy1999");
+    if (response.success) {
+      const user = response.data.user;
+      dispatch(
+        login({
+          id: user.id,
+          username: user.username,
+          email: user.email,
+        })
+      );
+      console.log(response.data.user);
+    }
+  };
+
   return (
     <div className="h-screen flex">
       <div className="flex w-1/2 bg-gradient-to-tr from-cyan-400 via-cyan-500 to-cyan-600 i justify-around items-center">
         <div>
+          <h1>{loginStat.toString()}</h1>
           <h1 className="text-white font-bold text-4xl font-sans">
             Cagayan Educational Supply
           </h1>
@@ -62,8 +85,9 @@ const Login = () => {
             />
           </div>
           <button
-            type="submit"
+            type="button"
             className="text-white w-full bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-md px-5 py-2.5 text-center mr-2 mb-2"
+            onClick={async () => loginUser()}
           >
             Login
           </button>

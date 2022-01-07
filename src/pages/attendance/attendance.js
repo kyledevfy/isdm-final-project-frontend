@@ -3,7 +3,6 @@ import AttendanceDatepicker from "../../components/attendanceDatepicker";
 import AttendanceTable from "../../components/attendanceTable";
 import Header from "../../components/header";
 import Sidebar from "../../components/sidebar";
-import { Link } from "react-router-dom";
 
 const Attendance = (props) => {
   return (
