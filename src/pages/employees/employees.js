@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 const Employees = (props) => {
   const [toggleModal, setToggleModal] = useState(false);
   const [toggleEditModal, setToggleEditModal] = useState(false);
+  const [editId, setEditId] = useState(0);
   const loginStatus = useSelector((state) => state.loginStatus.value);
 
   return (
@@ -55,6 +56,7 @@ const Employees = (props) => {
               <EmployeeTable
                 toggleEditModal={toggleEditModal}
                 setToggleEditModal={setToggleEditModal}
+                setEditId={setEditId}
               />
               <AddEmployeeModal
                 toggleModal={toggleModal}
@@ -63,6 +65,7 @@ const Employees = (props) => {
               <EditEmployeeModal
                 toggleEditModal={toggleEditModal}
                 setToggleEditModal={setToggleEditModal}
+                editId={editId}
               />
             </div>
           </div>

@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 
 const EmployeeTable = (props) => {
   const employees = useSelector((state) => state.employees.value);
-  console.log(employees);
   const OddRow = ({ data }) => {
     const rowData = data.attributes;
     return (
@@ -28,7 +27,10 @@ const EmployeeTable = (props) => {
           <a
             href="#"
             className="text-blue-600 hover:text-blue-900"
-            onClick={() => props.setToggleEditModal(true)}
+            onClick={() => {
+              props.setToggleEditModal(true);
+              props.setEditId(data.id);
+            }}
           >
             Edit
           </a>
@@ -60,7 +62,10 @@ const EmployeeTable = (props) => {
           <a
             href="#"
             className="text-blue-600 hover:text-blue-900"
-            onClick={() => props.setToggleEditModal(true)}
+            onClick={() => {
+              props.setToggleEditModal(true);
+              props.setEditId(data.id);
+            }}
           >
             Edit
           </a>
@@ -108,9 +113,9 @@ const EmployeeTable = (props) => {
               <tbody>
                 {employees.data.map((value, index) => {
                   if (index % 2 === 0) {
-                    return <EvenRow key={index} data={value} />;
+                    return <OddRow key={index} data={value} />;
                   }
-                  return <OddRow key={index} data={value} />;
+                  return <EvenRow key={index} data={value} />;
                 })}
               </tbody>
             </table>

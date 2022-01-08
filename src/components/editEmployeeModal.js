@@ -1,6 +1,52 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { getEmployee, updateEmployee } from "../services/employees";
 
 const EditEmployeeModal = (props) => {
+  const lastname = useRef();
+  const firstname = useRef();
+  const middlename = useRef();
+  const driver = useRef();
+  const status = useRef();
+  const [successMessage, setSuccessMessage] = useState("");
+  const [msgColor, setMsgColor] = useState("");
+
+  const fetchEmployee = async () => {
+    const employee = await getEmployee(props.editId);
+
+    if (employee.success) {
+      var emp = employee.data.data;
+      lastname.current.value = emp.attributes.lastname;
+      firstname.current.value = emp.attributes.firstname;
+      middlename.current.value = emp.attributes.middlename;
+      driver.current.value = emp.attributes.isDriver ? "Yes" : "No";
+      status.current.value = emp.attributes.status ? "Active" : "Inactive";
+    }
+  };
+
+  const editEmployee = async (event) => {
+    event.preventDefault();
+    setSuccessMessage("");
+    const editedEmployee = {
+      lastname: lastname.current.value,
+      firstname: firstname.current.value,
+      middlename: middlename.current.value,
+      isDriver: driver.current.value === "Yes" ? true : false,
+      status: status.current.value === "Active" ? true : false,
+    };
+    const response = await updateEmployee(props.editId, editedEmployee);
+    if (response.success) {
+      setMsgColor("green");
+      setSuccessMessage("Employee edited successfully");
+    } else {
+      setMsgColor("red");
+      setSuccessMessage("An error occurred in editing employee");
+    }
+  };
+
+  useEffect(() => {
+    fetchEmployee();
+  });
+
   return (
     <div
       id="edit-modal"
@@ -34,7 +80,7 @@ const EditEmployeeModal = (props) => {
           </div>
           <form
             className="space-y-4 px-6 lg:px-8 pb-6 xl:pb-8 overflow-y-auto"
-            action="#"
+            onSubmit={editEmployee}
           >
             <h3 className="text-xl text-center font-bold text-cyan-600">
               Edit Employee
@@ -47,6 +93,7 @@ const EditEmployeeModal = (props) => {
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 placeholder="Lastname"
                 required
+                ref={lastname}
               />
             </div>
             <div>
@@ -57,6 +104,7 @@ const EditEmployeeModal = (props) => {
                 placeholder="Firstname"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 required
+                ref={firstname}
               />
             </div>
             <div>
@@ -67,126 +115,47 @@ const EditEmployeeModal = (props) => {
                 placeholder="Middlename"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 required
+                ref={middlename}
               />
             </div>
-            <div>
-              <input
-                type="street"
-                name="street"
-                id="street"
-                placeholder="Street"
+            <div className="flex justify-center items-center">
+              <p className="mr-2">Driver:</p>
+              <select
+                name="isDriver"
+                id="isDriver"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                ref={driver}
                 required
-              />
+              >
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
             </div>
-            <div>
-              <input
-                type="barangay"
-                name="barangay"
-                id="barangay"
-                placeholder="Barangay"
+            <div className="flex justify-center items-center">
+              <p className="mr-2">Status:</p>
+              <select
+                name="status"
+                id="status"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                ref={status}
                 required
-              />
+              >
+                <option value="Active">Active</option>
+                <option value="Inactive">Inactive</option>
+              </select>
             </div>
-            <div>
-              <input
-                type="cityMun"
-                name="cityMun"
-                id="cityMun"
-                placeholder="City/Municipality"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                required
-              />
-            </div>
-            <div>
-              <input
-                type="province"
-                name="province"
-                id="province"
-                placeholder="Province"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                required
-              />
-            </div>
-            <div className="flex justify-start items-center">
-              <div className="label mr-6">
-                <p>Driver?</p>
-              </div>
-              <div className="radio flex justify-start items-center">
-                <div className="form-check mr-5">
-                  <input
-                    className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-cyan-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
-                    type="radio"
-                    name="driverRadio"
-                    id="driverYes"
-                  />
-                  <label
-                    className="form-check-label inline-block text-gray-800"
-                    htmlFor="driverYes"
-                  >
-                    Yes
-                  </label>
-                </div>
-                <div className="form-check">
-                  <input
-                    className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-cyan-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
-                    type="radio"
-                    name="driverRadio"
-                    id="driverNo"
-                    checked
-                  />
-                  <label
-                    className="form-check-label inline-block text-gray-800"
-                    htmlFor="driverNo"
-                  >
-                    No
-                  </label>
-                </div>
-              </div>
-            </div>
-            <div className="flex justify-start items-center">
-              <div className="label mr-6">
-                <p>Status: </p>
-              </div>
-              <div className="radio flex justify-center items-center">
-                <div className="form-check mr-5">
-                  <input
-                    className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-cyan-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
-                    type="radio"
-                    name="statusRadio"
-                    id="statusActive"
-                    checked
-                  />
-                  <label
-                    className="form-check-label inline-block text-gray-800"
-                    htmlFor="statusActive"
-                  >
-                    Active
-                  </label>
-                </div>
-                <div className="form-check">
-                  <input
-                    className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-cyan-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
-                    type="radio"
-                    name="statusRadio"
-                    id="statusInactive"
-                  />
-                  <label
-                    className="form-check-label inline-block text-gray-800"
-                    htmlFor="statusInactive"
-                  >
-                    Inactive
-                  </label>
-                </div>
-              </div>
-            </div>
+
             <button
               type="submit"
               className="text-white w-full flex justify-center font-bold items-center bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br rounded-lg text-lg px-3 py-2 text-center"
             >
               Edit
             </button>
+            <p
+              className={`text-sm font-medium text-${msgColor}-500 text-center`}
+            >
+              {successMessage}
+            </p>
           </form>
         </div>
       </div>
