@@ -7,11 +7,13 @@ import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import userReducer from "./state/user";
 import loginStatusReducer from "./state/loginStatus";
+import employeesReducer from "./state/employees";
 
 const store = configureStore({
   reducer: {
     user: userReducer,
     loginStatus: loginStatusReducer,
+    employees: employeesReducer,
   },
 });
 

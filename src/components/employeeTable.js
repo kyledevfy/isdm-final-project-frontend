@@ -1,6 +1,73 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 const EmployeeTable = (props) => {
+  const employees = useSelector((state) => state.employees.value);
+  console.log(employees);
+  const OddRow = ({ data }) => {
+    const rowData = data.attributes;
+    return (
+      <tr className="bg-white border-b">
+        <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
+          {rowData.employeeId}
+        </td>
+        <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap">
+          {rowData.lastname +
+            ", " +
+            rowData.firstname +
+            " " +
+            rowData.middlename}
+        </td>
+        <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap">
+          {rowData.isDriver ? "Yes" : "No"}
+        </td>
+        <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap">
+          {rowData.status ? "Active" : "Inactive"}
+        </td>
+        <td className="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
+          <a
+            href="#"
+            className="text-blue-600 hover:text-blue-900"
+            onClick={() => props.setToggleEditModal(true)}
+          >
+            Edit
+          </a>
+        </td>
+      </tr>
+    );
+  };
+  const EvenRow = ({ data }) => {
+    const rowData = data.attributes;
+    return (
+      <tr className="bg-gray-50 border-b">
+        <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
+          {rowData.employeeId}
+        </td>
+        <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap">
+          {rowData.lastname +
+            ", " +
+            rowData.firstname +
+            " " +
+            rowData.middlename}
+        </td>
+        <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap">
+          {rowData.isDriver ? "Yes" : "No"}
+        </td>
+        <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap">
+          {rowData.status ? "Active" : "Inactive"}
+        </td>
+        <td className="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
+          <a
+            href="#"
+            className="text-blue-600 hover:text-blue-900"
+            onClick={() => props.setToggleEditModal(true)}
+          >
+            Edit
+          </a>
+        </td>
+      </tr>
+    );
+  };
   return (
     <div className="flex flex-col">
       <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -39,105 +106,12 @@ const EmployeeTable = (props) => {
                 </tr>
               </thead>
               <tbody>
-                <tr className="bg-white border-b">
-                  <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
-                    CES20210001
-                  </td>
-                  <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap">
-                    John Doe Smith
-                  </td>
-                  <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap">
-                    False
-                  </td>
-                  <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap">
-                    Active
-                  </td>
-                  <td className="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
-                    <a
-                      href="#"
-                      className="text-blue-600 hover:text-blue-900"
-                      onClick={() => props.setToggleEditModal(true)}
-                    >
-                      Edit
-                    </a>
-                  </td>
-                </tr>
-                <tr className="bg-gray-50 border-b">
-                  <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
-                    CES20210001
-                  </td>
-                  <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap">
-                    John Doe Smith
-                  </td>
-                  <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap">
-                    False
-                  </td>
-                  <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap">
-                    Active
-                  </td>
-                  <td className="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
-                    <a href="#" className="text-blue-600 hover:text-blue-900">
-                      Edit
-                    </a>
-                  </td>
-                </tr>
-                <tr className="bg-white border-b">
-                  <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
-                    CES20210001
-                  </td>
-                  <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap">
-                    John Doe Smith
-                  </td>
-                  <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap">
-                    False
-                  </td>
-                  <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap">
-                    Active
-                  </td>
-                  <td className="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
-                    <a href="#" className="text-blue-600 hover:text-blue-900">
-                      Edit
-                    </a>
-                  </td>
-                </tr>
-                <tr className="bg-gray-50 border-b">
-                  <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
-                    CES20210001
-                  </td>
-                  <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap">
-                    John Doe Smith
-                  </td>
-                  <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap">
-                    False
-                  </td>
-                  <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap">
-                    Active
-                  </td>
-                  <td className="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
-                    <a href="#" className="text-blue-600 hover:text-blue-900">
-                      Edit
-                    </a>
-                  </td>
-                </tr>
-                <tr className="bg-white">
-                  <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
-                    CES20210001
-                  </td>
-                  <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap">
-                    John Doe Smith
-                  </td>
-                  <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap">
-                    False
-                  </td>
-                  <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap">
-                    Active
-                  </td>
-                  <td className="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
-                    <a href="#" className="text-blue-600 hover:text-blue-900">
-                      Edit
-                    </a>
-                  </td>
-                </tr>
+                {employees.data.map((value, index) => {
+                  if (index % 2 === 0) {
+                    return <EvenRow key={index} data={value} />;
+                  }
+                  return <OddRow key={index} data={value} />;
+                })}
               </tbody>
             </table>
           </div>

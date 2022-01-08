@@ -3,6 +3,8 @@ import { useDispatch } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import Loading from "../components/loading";
 import { getUser } from "../services/auth";
+import { getEmployees } from "../services/employees";
+import { loadEmployees } from "../state/employees";
 import { changeLoginStatus } from "../state/loginStatus";
 import Attendance from "./attendance/attendance";
 import IndividualAttendance from "./attendance/individualAttendance";
@@ -17,20 +19,25 @@ const Main = () => {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
 
-  const handleLoginStatus = async () => {
+  const loadState = async () => {
     if (
       localStorage.getItem("cesJwt") !== null &&
       localStorage.getItem("cesUserId") !== null
     ) {
-      const response = await getUser(localStorage.getItem("cesUserId"));
-      if (response.success) {
-        dispatch(changeLoginStatus(response.success));
+      const user = await getUser(localStorage.getItem("cesUserId"));
+      const employees = await getEmployees();
+      if (user.success) {
+        dispatch(changeLoginStatus(user.success));
+      }
+
+      if (employees.success) {
+        dispatch(loadEmployees(employees.data));
       }
     }
   };
 
   useEffect(() => {
-    handleLoginStatus();
+    loadState();
     setTimeout(() => {
       setLoading(false);
     }, 1500);

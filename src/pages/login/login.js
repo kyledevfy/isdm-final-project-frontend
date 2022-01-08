@@ -32,7 +32,6 @@ const Login = () => {
         })
       );
       dispatch(changeLoginStatus(response.success));
-      console.log(response.data.user);
       setLoading(false);
     } else {
       setErrorMessage("Invalid email or password");
