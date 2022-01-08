@@ -1,10 +1,7 @@
 import React, { useEffect } from "react";
 import { MdAccountCircle, MdMenu, MdClose } from "react-icons/md";
-import { useSelector } from "react-redux";
 
 const Header = (props) => {
-  const user = useSelector((state) => state.user.value);
-
   // Window resize listener
   useEffect(() => {
     const handleResize = () => {
@@ -48,7 +45,9 @@ const Header = (props) => {
       <div className="header-profile">
         <div className="flex items-center px-4 -mx-2">
           <MdAccountCircle size={30} className="text-cyan-600" />
-          <h4 className="ml-2 font-medium text-gray-600">{user.username}</h4>
+          <h4 className="ml-2 font-medium text-gray-600">
+            {localStorage.getItem("cesUsername")}
+          </h4>
         </div>
       </div>
     </div>

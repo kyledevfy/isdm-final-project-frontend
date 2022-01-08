@@ -7,9 +7,14 @@ import {
 } from "react-icons/bs";
 import { MdLogout } from "react-icons/md";
 import { useLocation, NavLink } from "react-router-dom";
+import { userLogout } from "../services/auth";
+import { useDispatch } from "react-redux";
+import { changeLoginStatus } from "../state/loginStatus";
 
 const Sidebar = (props) => {
   var currentRoute = useLocation().pathname;
+  const dispatch = useDispatch();
+
   return (
     <div
       className={`sidebar fixed ${
@@ -41,7 +46,7 @@ const Sidebar = (props) => {
             to="/employees"
           >
             <BsFillPersonFill size={18} className="text-cyan-600" />
-            <span className="mx-4 font-medium">Empoloyees</span>
+            <span className="mx-4 font-medium">Employees</span>
           </NavLink>
 
           <NavLink
@@ -72,7 +77,13 @@ const Sidebar = (props) => {
           <hr className="my-6 border-gray-200" />
         </nav>
         <NavLink to="/login">
-          <div className="flex items-center cursor-pointer px-4 py-2 transition-colors duration-200 transform rounded-md text-red-500 hover:bg-gray-200 hover:text-red-600">
+          <div
+            className="flex items-center cursor-pointer px-4 py-2 transition-colors duration-200 transform rounded-md text-red-500 hover:bg-gray-200 hover:text-red-600"
+            onClick={() => {
+              userLogout();
+              dispatch(changeLoginStatus(false));
+            }}
+          >
             <MdLogout size={22} />
             <h4 className="ml-2 mr-6 font-medium">Logout</h4>
           </div>
