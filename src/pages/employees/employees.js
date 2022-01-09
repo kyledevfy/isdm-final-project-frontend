@@ -54,6 +54,7 @@ const Employees = (props) => {
                 </Link>
               </div>
               <EmployeeTable
+                status={true}
                 toggleEditModal={toggleEditModal}
                 setToggleEditModal={setToggleEditModal}
                 setEditId={setEditId}

@@ -9,9 +9,9 @@ import { Link, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const InactiveEmployees = (props) => {
-  const [toggleModal, setToggleModal] = useState(false);
   const [toggleEditModal, setToggleEditModal] = useState(false);
   const loginStatus = useSelector((state) => state.loginStatus.value);
+  const [editId, setEditId] = useState(0);
 
   return (
     <>
@@ -41,16 +41,15 @@ const InactiveEmployees = (props) => {
                 </Link>
               </div>
               <EmployeeTable
+                status={false}
                 toggleEditModal={toggleEditModal}
                 setToggleEditModal={setToggleEditModal}
-              />
-              <AddEmployeeModal
-                toggleModal={toggleModal}
-                setToggleModal={setToggleModal}
+                setEditId={setEditId}
               />
               <EditEmployeeModal
                 toggleEditModal={toggleEditModal}
                 setToggleEditModal={setToggleEditModal}
+                editId={editId}
               />
             </div>
           </div>

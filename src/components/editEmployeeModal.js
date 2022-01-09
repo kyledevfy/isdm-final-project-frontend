@@ -1,5 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { getEmployee, updateEmployee } from "../services/employees";
+import { useDispatch } from "react-redux";
+import { getEmployees } from "../services/employees";
+import { loadEmployees } from "../state/employees";
 
 const EditEmployeeModal = (props) => {
   const lastname = useRef();
@@ -8,7 +11,8 @@ const EditEmployeeModal = (props) => {
   const driver = useRef();
   const status = useRef();
   const [successMessage, setSuccessMessage] = useState("");
-  const [msgColor, setMsgColor] = useState("");
+  const [msgColor, setMsgColor] = useState("green");
+  const dispatch = useDispatch();
 
   const fetchEmployee = async () => {
     const employee = await getEmployee(props.editId);
@@ -37,6 +41,10 @@ const EditEmployeeModal = (props) => {
     if (response.success) {
       setMsgColor("green");
       setSuccessMessage("Employee edited successfully");
+      const employees = await getEmployees();
+      if (employees.success) {
+        dispatch(loadEmployees(employees.data));
+      }
     } else {
       setMsgColor("red");
       setSuccessMessage("An error occurred in editing employee");
@@ -62,7 +70,10 @@ const EditEmployeeModal = (props) => {
               type="button"
               className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center "
               data-modal-toggle="add-modal"
-              onClick={() => props.setToggleEditModal(false)}
+              onClick={() => {
+                props.setToggleEditModal(false);
+                setSuccessMessage("");
+              }}
             >
               <svg
                 className="w-5 h-5"

@@ -4,7 +4,7 @@ export async function generateEmployeeId() {
   const date = new Date();
   var num = date.getFullYear() * 10000;
   const response = await getEmployees();
-  var empId = "CES" + (num + response.data.length + 1).toString();
+  var empId = "CES" + (num + response.data.data.length + 1).toString();
 
   return empId;
 }

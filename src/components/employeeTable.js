@@ -3,45 +3,10 @@ import { useSelector } from "react-redux";
 
 const EmployeeTable = (props) => {
   const employees = useSelector((state) => state.employees.value);
-  const OddRow = ({ data }) => {
+  const TableRow = ({ data }) => {
     const rowData = data.attributes;
     return (
       <tr className="bg-white border-b">
-        <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
-          {rowData.employeeId}
-        </td>
-        <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap">
-          {rowData.lastname +
-            ", " +
-            rowData.firstname +
-            " " +
-            rowData.middlename}
-        </td>
-        <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap">
-          {rowData.isDriver ? "Yes" : "No"}
-        </td>
-        <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap">
-          {rowData.status ? "Active" : "Inactive"}
-        </td>
-        <td className="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
-          <a
-            href="#"
-            className="text-blue-600 hover:text-blue-900"
-            onClick={() => {
-              props.setToggleEditModal(true);
-              props.setEditId(data.id);
-            }}
-          >
-            Edit
-          </a>
-        </td>
-      </tr>
-    );
-  };
-  const EvenRow = ({ data }) => {
-    const rowData = data.attributes;
-    return (
-      <tr className="bg-gray-50 border-b">
         <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
           {rowData.employeeId}
         </td>
@@ -112,10 +77,15 @@ const EmployeeTable = (props) => {
               </thead>
               <tbody>
                 {employees.data.map((value, index) => {
-                  if (index % 2 === 0) {
-                    return <OddRow key={index} data={value} />;
+                  if (props.status) {
+                    if (value.attributes.status) {
+                      return <TableRow key={index} data={value} />;
+                    }
+                  } else {
+                    if (!value.attributes.status) {
+                      return <TableRow key={index} data={value} />;
+                    }
                   }
-                  return <EvenRow key={index} data={value} />;
                 })}
               </tbody>
             </table>

@@ -1,6 +1,44 @@
-import React from "react";
+import React, { useRef, useState } from "react";
+import { createEmployee, generateEmployeeId } from "../services/employees";
+import { useDispatch } from "react-redux";
+import { getEmployees } from "../services/employees";
+import { loadEmployees } from "../state/employees";
 
 const AddEmployeeModal = (props) => {
+  const lastname = useRef();
+  const firstname = useRef();
+  const middlename = useRef();
+  const driver = useRef();
+  const [successMessage, setSuccessMessage] = useState("");
+  const [msgColor, setMsgColor] = useState("green");
+  const dispatch = useDispatch();
+
+  const addNewEmployee = async (event) => {
+    event.preventDefault();
+    const empId = await generateEmployeeId();
+    const newEmp = {
+      employeeId: empId,
+      lastname: lastname.current.value,
+      firstname: firstname.current.value,
+      middlename: middlename.current.value,
+      isDriver: driver.current.value === "Yes" ? true : false,
+      status: true,
+    };
+    const newEmployee = await createEmployee(newEmp);
+
+    if (newEmployee.success) {
+      setMsgColor("green");
+      setSuccessMessage("New employee added successfully");
+      const employees = await getEmployees();
+      if (employees.success) {
+        dispatch(loadEmployees(employees.data));
+      }
+    } else {
+      setMsgColor("red");
+      setSuccessMessage("An error occurred in adding new employee");
+    }
+  };
+
   return (
     <div
       id="add-modal"
@@ -16,7 +54,13 @@ const AddEmployeeModal = (props) => {
               type="button"
               className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center "
               data-modal-toggle="add-modal"
-              onClick={() => props.setToggleModal(false)}
+              onClick={() => {
+                props.setToggleModal(false);
+                setSuccessMessage("");
+                lastname.current.value = "";
+                firstname.current.value = "";
+                middlename.current.value = "";
+              }}
             >
               <svg
                 className="w-5 h-5"
@@ -34,7 +78,7 @@ const AddEmployeeModal = (props) => {
           </div>
           <form
             className="space-y-4 px-6 lg:px-8 pb-6 xl:pb-8 overflow-y-auto"
-            action="#"
+            onSubmit={addNewEmployee}
           >
             <h3 className="text-xl text-center font-bold text-cyan-600">
               Add New Employee
@@ -47,6 +91,7 @@ const AddEmployeeModal = (props) => {
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 placeholder="Lastname"
                 required
+                ref={lastname}
               />
             </div>
             <div>
@@ -57,6 +102,7 @@ const AddEmployeeModal = (props) => {
                 placeholder="Firstname"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 required
+                ref={firstname}
               />
             </div>
             <div>
@@ -67,83 +113,21 @@ const AddEmployeeModal = (props) => {
                 placeholder="Middlename"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 required
+                ref={middlename}
               />
             </div>
-            <div>
-              <input
-                type="street"
-                name="street"
-                id="street"
-                placeholder="Street"
+            <div className="flex justify-center items-center">
+              <p className="mr-2">Driver:</p>
+              <select
+                name="isDriver"
+                id="isDriver"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                ref={driver}
                 required
-              />
-            </div>
-            <div>
-              <input
-                type="barangay"
-                name="barangay"
-                id="barangay"
-                placeholder="Barangay"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                required
-              />
-            </div>
-            <div>
-              <input
-                type="cityMun"
-                name="cityMun"
-                id="cityMun"
-                placeholder="City/Municipality"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                required
-              />
-            </div>
-            <div>
-              <input
-                type="province"
-                name="province"
-                id="province"
-                placeholder="Province"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                required
-              />
-            </div>
-            <div className="flex justify-start items-center">
-              <div className="label mr-6">
-                <p>Driver?</p>
-              </div>
-              <div className="radio flex justify-center items-center">
-                <div className="form-check mr-5">
-                  <input
-                    className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-cyan-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
-                    type="radio"
-                    name="driverRadio"
-                    id="driverYes"
-                  />
-                  <label
-                    className="form-check-label inline-block text-gray-800"
-                    htmlFor="driverYes"
-                  >
-                    Yes
-                  </label>
-                </div>
-                <div className="form-check">
-                  <input
-                    className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-cyan-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
-                    type="radio"
-                    name="driverRadio"
-                    id="driverNo"
-                    checked
-                  />
-                  <label
-                    className="form-check-label inline-block text-gray-800"
-                    htmlFor="driverNo"
-                  >
-                    No
-                  </label>
-                </div>
-              </div>
+              >
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
             </div>
             <button
               type="submit"
@@ -151,6 +135,11 @@ const AddEmployeeModal = (props) => {
             >
               Add
             </button>
+            <p
+              className={`text-sm font-medium text-${msgColor}-500 text-center`}
+            >
+              {successMessage}
+            </p>
           </form>
         </div>
       </div>
