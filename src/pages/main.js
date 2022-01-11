@@ -81,8 +81,6 @@ const Main = () => {
                 <InactiveEmployees
                   sidebarActive={sidebarActive}
                   setSidebarActive={setSidebarActive}
-                  empId={empId}
-                  setEmpId={setEmpId}
                 />
               }
             />
@@ -93,6 +91,8 @@ const Main = () => {
                 <Attendance
                   sidebarActive={sidebarActive}
                   setSidebarActive={setSidebarActive}
+                  empId={empId}
+                  setEmpId={setEmpId}
                   date={date}
                   setDate={setDate}
                 />
@@ -105,6 +105,9 @@ const Main = () => {
                 <IndividualAttendance
                   sidebarActive={sidebarActive}
                   setSidebarActive={setSidebarActive}
+                  empId={empId}
+                  setEmpId={setEmpId}
+                  date={date}
                 />
               }
             />

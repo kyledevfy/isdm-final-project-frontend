@@ -23,7 +23,7 @@ const IndividualAttendance = (props) => {
             } lg:pl-64`}
           >
             <Header
-              headerTitle={"Attendance / CES20210001"}
+              headerTitle={`Attendance / ${props.empId}`}
               sidebarActive={props.sidebarActive}
               setSidebarActive={props.setSidebarActive}
             />
@@ -34,7 +34,10 @@ const IndividualAttendance = (props) => {
                   className="text-cyan-600 font-bold hover:text-cyan-700"
                 />
               </Link>
-              <IndividualAttendanceTable />
+              <IndividualAttendanceTable
+                empId={props.empId}
+                setEmpId={props.setEmpId}
+              />
             </div>
           </div>
         </div>

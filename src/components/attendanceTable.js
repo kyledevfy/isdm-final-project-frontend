@@ -14,7 +14,6 @@ const AttendanceTable = (props) => {
     for (var i = 0; i < emp.length; i++) {
       if (emp[i].attributes.employeeId === id) {
         employee = emp[i].attributes;
-        console.log(employee);
         break;
       }
     }
@@ -41,11 +40,13 @@ const AttendanceTable = (props) => {
         <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap">
           {data.date}
         </td>
-        <td className="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
+        <td
+          className="py-4 px-6 text-sm font-medium text-right whitespace-nowrap"
+          onClick={() => props.setEmpId(data.employeeId)}
+        >
           <Link
             to="/attendance/individual"
             className="text-blue-600 hover:text-blue-900"
-            onClick={() => props.setEmpId(data.employeeId)}
           >
             Open
           </Link>

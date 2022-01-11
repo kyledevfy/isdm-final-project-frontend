@@ -6,8 +6,11 @@ const AttendanceDatepicker = (props) => {
     <div>
       <DateRangePicker
         onChange={(value) => {
-          var d1 = value[0].toISOString().split("T")[0];
-          var d2 = value[1].toISOString().split("T")[0];
+          var date1 = new Date(value[0]);
+          date1.setDate(date1.getDate() + 1);
+          var date2 = new Date(value[1]);
+          var d1 = date1.toISOString().split("T")[0];
+          var d2 = date2.toISOString().split("T")[0];
           props.setDate([d1, d2]);
         }}
         value={props.date}

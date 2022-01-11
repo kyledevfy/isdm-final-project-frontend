@@ -11,7 +11,6 @@ import { useDispatch } from "react-redux";
 
 const Attendance = (props) => {
   const loginStatus = useSelector((state) => state.loginStatus.value);
-
   const dispatch = useDispatch();
 
   const fetchAttendance = async () => {
