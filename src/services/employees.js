@@ -42,6 +42,26 @@ export async function getEmployee(id) {
   }
 }
 
+export async function getEmployeeByEmpId(id) {
+  try {
+    const response = await api({
+      url: "/employees/findByEmpId",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("cesJwt"),
+      },
+      method: "post",
+      data: {
+        employeeId: id,
+      },
+    });
+
+    return { success: true, data: response.data };
+  } catch (error) {
+    console.log(error);
+    return { success: false };
+  }
+}
+
 export async function createEmployee(newEmployee) {
   try {
     const response = await api({

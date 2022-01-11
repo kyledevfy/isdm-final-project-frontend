@@ -8,12 +8,14 @@ import { Provider } from "react-redux";
 import userReducer from "./state/user";
 import loginStatusReducer from "./state/loginStatus";
 import employeesReducer from "./state/employees";
+import attendanceReducer from "./state/attendance";
 
 const store = configureStore({
   reducer: {
     user: userReducer,
     loginStatus: loginStatusReducer,
     employees: employeesReducer,
+    attendance: attendanceReducer,
   },
 });
 

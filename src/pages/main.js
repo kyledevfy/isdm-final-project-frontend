@@ -17,6 +17,9 @@ import Settings from "./settings/settings";
 const Main = () => {
   const [sidebarActive, setSidebarActive] = useState(true);
   const [loading, setLoading] = useState(true);
+  const [empId, setEmpId] = useState("");
+  const dateNow = new Date().toISOString().split("T")[0];
+  const [date, setDate] = useState([dateNow, dateNow]);
   const dispatch = useDispatch();
 
   const loadState = async () => {
@@ -78,6 +81,8 @@ const Main = () => {
                 <InactiveEmployees
                   sidebarActive={sidebarActive}
                   setSidebarActive={setSidebarActive}
+                  empId={empId}
+                  setEmpId={setEmpId}
                 />
               }
             />
@@ -88,6 +93,8 @@ const Main = () => {
                 <Attendance
                   sidebarActive={sidebarActive}
                   setSidebarActive={setSidebarActive}
+                  date={date}
+                  setDate={setDate}
                 />
               }
             />

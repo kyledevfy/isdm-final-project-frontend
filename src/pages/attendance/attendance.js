@@ -1,13 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import AttendanceDatepicker from "../../components/attendanceDatepicker";
 import AttendanceTable from "../../components/attendanceTable";
 import Header from "../../components/header";
 import Sidebar from "../../components/sidebar";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
+import { getAttendance } from "../../services/attendance";
+import { loadAttendance } from "../../state/attendance";
+import { useDispatch } from "react-redux";
 
 const Attendance = (props) => {
   const loginStatus = useSelector((state) => state.loginStatus.value);
+
+  const dispatch = useDispatch();
+
+  const fetchAttendance = async () => {
+    const attendance = await getAttendance(props.date);
+    if (attendance.success) {
+      dispatch(loadAttendance(attendance.data));
+    }
+  };
+
+  useEffect(() => {
+    fetchAttendance();
+  }, [props.date]);
 
   return (
     <>
@@ -32,9 +48,12 @@ const Attendance = (props) => {
                 <span className="text-gray-600 mr-3 text-lg">
                   Select Date Range:{" "}
                 </span>
-                <AttendanceDatepicker />
+                <AttendanceDatepicker
+                  setDate={props.setDate}
+                  date={props.date}
+                />
               </div>
-              <AttendanceTable />
+              <AttendanceTable empId={props.empId} setEmpId={props.setEmpId} />
             </div>
           </div>
         </div>
