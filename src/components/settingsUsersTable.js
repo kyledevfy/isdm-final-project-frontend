@@ -22,7 +22,7 @@ const SettingsUsersTable = (props) => {
             className="text-blue-600 hover:text-blue-900"
             onClick={() => {
               props.setToggleEditModal(true);
-              props.setEditId(data.id);
+              props.setUserEditId(data.id);
             }}
           >
             Edit

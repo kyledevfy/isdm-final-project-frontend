@@ -1,6 +1,28 @@
-import React from "react";
+import React, { useRef, useState } from "react";
+import { updateUserPassword } from "../services/users";
 
 const EditUserModal = (props) => {
+  const password = useRef();
+  const [successMessage, setSuccessMessage] = useState("");
+  const [msgColor, setMsgColor] = useState("green");
+
+  const editUser = async (event) => {
+    event.preventDefault();
+    const response = await updateUserPassword(
+      props.userEditId,
+      password.current.value
+    );
+    if (response.success) {
+      setMsgColor("green");
+      setSuccessMessage("User password edited successfully");
+      props.setAddedOrEdited(true);
+      password.current.value = "";
+    } else {
+      setMsgColor("red");
+      setSuccessMessage("User password edit unsuccessful");
+      password.current.value = "";
+    }
+  };
   return (
     <div
       id="add-modal"
@@ -16,7 +38,11 @@ const EditUserModal = (props) => {
               type="button"
               className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center "
               data-modal-toggle="add-modal"
-              onClick={() => props.setToggleEditModal(false)}
+              onClick={() => {
+                props.setToggleEditModal(false);
+                setSuccessMessage("");
+                password.current.value = "";
+              }}
             >
               <svg
                 className="w-5 h-5"
@@ -34,7 +60,7 @@ const EditUserModal = (props) => {
           </div>
           <form
             className="space-y-4 px-6 lg:px-8 pb-6 xl:pb-8 overflow-y-auto"
-            action="#"
+            onSubmit={editUser}
           >
             <h3 className="text-xl text-center font-bold text-cyan-600">
               Edit User Password
@@ -47,6 +73,7 @@ const EditUserModal = (props) => {
                 placeholder="Password"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 required
+                ref={password}
               />
             </div>
             <button
@@ -55,6 +82,11 @@ const EditUserModal = (props) => {
             >
               Edit
             </button>
+            <p
+              className={`text-sm font-medium text-${msgColor}-500 text-center`}
+            >
+              {successMessage}
+            </p>
           </form>
         </div>
       </div>

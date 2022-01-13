@@ -69,13 +69,13 @@ const Settings = (props) => {
               <AddUserModal
                 toggleModal={toggleModal}
                 setToggleModal={setToggleModal}
-                addedOrEdited={addedOrEdited}
+                setAddedOrEdited={setAddedOrEdited}
               />
               <EditUserModal
                 toggleEditModal={toggleEditModal}
                 setToggleEditModal={setToggleEditModal}
                 userEditId={userEditId}
-                addedOrEdited={addedOrEdited}
+                setAddedOrEdited={setAddedOrEdited}
               />
             </div>
           </div>
