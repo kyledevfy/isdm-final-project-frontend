@@ -1,6 +1,37 @@
-import React from "react";
+import React, { useRef, useState } from "react";
+import { createUser } from "../services/users";
 
 const AddUserModal = (props) => {
+  const username = useRef();
+  const email = useRef();
+  const password = useRef();
+
+  const [successMessage, setSuccessMessage] = useState("");
+  const [msgColor, setMsgColor] = useState("green");
+
+  const addUser = async (event) => {
+    event.preventDefault();
+    const response = await createUser({
+      username: username.current.value,
+      email: email.current.value,
+      password: password.current.value,
+      confirmed: true,
+    });
+    if (response.success) {
+      setMsgColor("green");
+      setSuccessMessage("New user added successfully");
+      props.setAddedOrEdited(true);
+      username.current.value = "";
+      email.current.value = "";
+      password.current.value = "";
+    } else {
+      setMsgColor("red");
+      setSuccessMessage("User add unsuccessful");
+      username.current.value = "";
+      email.current.value = "";
+      password.current.value = "";
+    }
+  };
   return (
     <div
       id="add-modal"
@@ -16,7 +47,12 @@ const AddUserModal = (props) => {
               type="button"
               className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center "
               data-modal-toggle="add-modal"
-              onClick={() => props.setToggleModal(false)}
+              onClick={() => {
+                props.setToggleModal(false);
+                username.current.value = "";
+                email.current.value = "";
+                password.current.value = "";
+              }}
             >
               <svg
                 className="w-5 h-5"
@@ -34,7 +70,7 @@ const AddUserModal = (props) => {
           </div>
           <form
             className="space-y-4 px-6 lg:px-8 pb-6 xl:pb-8 overflow-y-auto"
-            action="#"
+            onSubmit={addUser}
           >
             <h3 className="text-xl text-center font-bold text-cyan-600">
               Add New User
@@ -47,6 +83,7 @@ const AddUserModal = (props) => {
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 placeholder="Username"
                 required
+                ref={username}
               />
             </div>
             <div>
@@ -57,6 +94,7 @@ const AddUserModal = (props) => {
                 placeholder="Email"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 required
+                ref={email}
               />
             </div>
             <div>
@@ -67,6 +105,7 @@ const AddUserModal = (props) => {
                 placeholder="Password"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 required
+                ref={password}
               />
             </div>
             <button
@@ -75,6 +114,11 @@ const AddUserModal = (props) => {
             >
               Add
             </button>
+            <p
+              className={`text-sm font-medium text-${msgColor}-500 text-center`}
+            >
+              {successMessage}
+            </p>
           </form>
         </div>
       </div>

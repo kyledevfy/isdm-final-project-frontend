@@ -59,7 +59,7 @@ export async function createUser(newUser) {
         Authorization: "Bearer " + localStorage.getItem("cesJwt"),
       },
       method: "post",
-      data: { newUser },
+      data: newUser,
     });
 
     return { success: true, data: response.data };
