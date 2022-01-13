@@ -18,7 +18,8 @@ const Main = () => {
   const [sidebarActive, setSidebarActive] = useState(true);
   const [loading, setLoading] = useState(true);
   const [empId, setEmpId] = useState("");
-  const dateNow = new Date().toISOString().split("T")[0];
+  // const dateNow = new Date().toISOString().split("T")[0].toString();
+  const dateNow = new Date();
   const [date, setDate] = useState([dateNow, dateNow]);
   const dispatch = useDispatch();
 
