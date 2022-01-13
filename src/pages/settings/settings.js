@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../../components/header";
 import SettingsUsersTable from "../../components/settingsUsersTable";
 import Sidebar from "../../components/sidebar";
@@ -7,11 +7,29 @@ import AddUserModal from "../../components/addUserModal";
 import EditUserModal from "../../components/editUserModal";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
+import { getUsers } from "../../services/users";
 
 const Settings = (props) => {
   const [toggleModal, setToggleModal] = useState(false);
   const [toggleEditModal, setToggleEditModal] = useState(false);
+  const [addedOrEdited, setAddedOrEdited] = useState(false);
+  const [users, setUser] = useState([]);
+  const [userEditId, setUserEditId] = useState(1);
   const loginStatus = useSelector((state) => state.loginStatus.value);
+
+  const loadUsers = async () => {
+    const response = await getUsers();
+    if (response.success) {
+      setUser(response.data);
+    }
+  };
+
+  useEffect(() => {
+    loadUsers();
+    return () => {
+      setAddedOrEdited(false);
+    };
+  }, [addedOrEdited]);
 
   return (
     <>
@@ -45,14 +63,19 @@ const Settings = (props) => {
               <SettingsUsersTable
                 toggleEditModal={toggleEditModal}
                 setToggleEditModal={setToggleEditModal}
+                setUserEditId={setUserEditId}
+                users={users}
               />
               <AddUserModal
                 toggleModal={toggleModal}
                 setToggleModal={setToggleModal}
+                addedOrEdited={addedOrEdited}
               />
               <EditUserModal
                 toggleEditModal={toggleEditModal}
                 setToggleEditModal={setToggleEditModal}
+                userEditId={userEditId}
+                addedOrEdited={addedOrEdited}
               />
             </div>
           </div>

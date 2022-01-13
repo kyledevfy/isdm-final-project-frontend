@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 const Employees = (props) => {
   const [toggleModal, setToggleModal] = useState(false);
   const [toggleEditModal, setToggleEditModal] = useState(false);
-  const [editId, setEditId] = useState(0);
+  const [editId, setEditId] = useState(1);
   const loginStatus = useSelector((state) => state.loginStatus.value);
 
   return (

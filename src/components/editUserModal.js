@@ -37,33 +37,13 @@ const EditUserModal = (props) => {
             action="#"
           >
             <h3 className="text-xl text-center font-bold text-cyan-600">
-              Edit User
+              Edit User Password
             </h3>
-            <div>
-              <input
-                type="username"
-                name="username"
-                id="username"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                placeholder="Username"
-                required
-              />
-            </div>
-            <div>
-              <input
-                type="email"
-                name="email"
-                id="email"
-                placeholder="Email"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                required
-              />
-            </div>
             <div>
               <input
                 type="password"
                 name="password"
-                id="password"
+                id="editpassword"
                 placeholder="Password"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 required
