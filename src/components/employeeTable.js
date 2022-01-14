@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 
 const EmployeeTable = (props) => {
   const employees = useSelector((state) => state.employees.value);
+
   const TableRow = ({ data }) => {
     const rowData = data.attributes;
     return (
@@ -76,7 +77,7 @@ const EmployeeTable = (props) => {
                 </tr>
               </thead>
               <tbody>
-                {employees.data.map((value, index) => {
+                {employees.map((value, index) => {
                   if (props.status) {
                     if (value.attributes.status) {
                       return <TableRow key={index} data={value} />;

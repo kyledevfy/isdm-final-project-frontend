@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import EmployeeTable from "../../components/employeeTable";
 import Header from "../../components/header";
 import Sidebar from "../../components/sidebar";
@@ -7,12 +7,27 @@ import AddEmployeeModal from "../../components/addEmployeeModal";
 import EditEmployeeModal from "../../components/editEmployeeModal";
 import { Link, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { getEmployees } from "../../services/employees";
+import { useDispatch } from "react-redux";
+import { loadEmployees } from "../../state/employees";
 
 const Employees = (props) => {
   const [toggleModal, setToggleModal] = useState(false);
   const [toggleEditModal, setToggleEditModal] = useState(false);
   const [editId, setEditId] = useState(1);
   const loginStatus = useSelector((state) => state.loginStatus.value);
+  const dispatch = useDispatch();
+
+  const fetchEmployees = async () => {
+    const employees = await getEmployees();
+    if (employees.success) {
+      dispatch(loadEmployees(employees.data.data));
+    }
+  };
+
+  useEffect(() => {
+    fetchEmployees();
+  });
 
   return (
     <>

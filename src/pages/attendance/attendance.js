@@ -8,6 +8,8 @@ import { Navigate } from "react-router-dom";
 import { getAttendance } from "../../services/attendance";
 import { loadAttendance } from "../../state/attendance";
 import { useDispatch } from "react-redux";
+import { loadEmployees } from "../../state/employees";
+import { getEmployees } from "../../services/employees";
 
 const Attendance = (props) => {
   const loginStatus = useSelector((state) => state.loginStatus.value);
@@ -19,6 +21,17 @@ const Attendance = (props) => {
       dispatch(loadAttendance(attendance.data));
     }
   };
+
+  const fetchEmployees = async () => {
+    const employees = await getEmployees();
+    if (employees.success) {
+      dispatch(loadEmployees(employees.data.data));
+    }
+  };
+
+  useEffect(() => {
+    fetchEmployees();
+  });
 
   useEffect(() => {
     fetchAttendance();

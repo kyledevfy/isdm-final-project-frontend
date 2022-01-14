@@ -1,13 +1,12 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 
 const IndividualAttendanceTable = (props) => {
   const attendance = useSelector((state) => state.attendance.value);
   const employees = useSelector((state) => state.employees.value);
 
   const getEmployee = (id) => {
-    const emp = employees.data;
+    const emp = employees;
     var employee = {};
 
     for (var i = 0; i < emp.length; i++) {
