@@ -45,7 +45,7 @@ const Login = () => {
         <Navigate to={"/"} />
       ) : (
         <div className="h-screen flex">
-          <div className="flex w-1/2 bg-gradient-to-tr from-cyan-400 via-cyan-500 to-cyan-600 i justify-around items-center">
+          <div className="hidden md:flex w-1/2 bg-gradient-to-tr from-cyan-400 via-cyan-500 to-cyan-600 i justify-around items-center">
             <div>
               <h1 className="text-white font-bold text-4xl font-sans">
                 Cagayan Educational Supply
@@ -55,8 +55,8 @@ const Login = () => {
               </p>
             </div>
           </div>
-          <div className="flex w-1/2 justify-center items-center bg-white">
-            <form onSubmit={loginUser} className="bg-white w-2/5">
+          <div className="flex w-full md:w-1/2 justify-center items-center bg-white">
+            <form onSubmit={loginUser} className="bg-white w-3/5 md:w-2/5">
               <h1 className="text-gray-800 font-bold text-4xl mb-1">
                 Hi there!
               </h1>
