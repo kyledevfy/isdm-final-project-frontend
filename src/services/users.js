@@ -61,10 +61,8 @@ export async function createUser(newUser) {
       method: "post",
       data: newUser,
     });
-
     return { success: true, data: response.data };
   } catch (error) {
-    console.log(error);
-    return { success: false };
+    return { success: false, error: error };
   }
 }

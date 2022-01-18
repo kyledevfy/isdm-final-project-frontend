@@ -26,7 +26,7 @@ const AddUserModal = (props) => {
       password.current.value = "";
     } else {
       setMsgColor("red");
-      setSuccessMessage("User add unsuccessful");
+      setSuccessMessage("Email already exist");
       username.current.value = "";
       email.current.value = "";
       password.current.value = "";
@@ -52,6 +52,7 @@ const AddUserModal = (props) => {
                 username.current.value = "";
                 email.current.value = "";
                 password.current.value = "";
+                setSuccessMessage("");
               }}
             >
               <svg

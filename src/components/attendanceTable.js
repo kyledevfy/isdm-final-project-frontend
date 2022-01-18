@@ -31,10 +31,10 @@ const AttendanceTable = (props) => {
           {`${employee.lastname}, ${employee.firstname} ${employee.middlename}`}
         </td>
         <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap">
-          {data.timeIn.substring(0, 5)}
+          {data.timeIn === null ? "" : data.timeIn.substring(0, 5)}
         </td>
         <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap">
-          {data.timeOut.substring(0, 5)}
+          {data.timeOut === null ? "" : data.timeOut.substring(0, 5)}
         </td>
         <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap">
           {data.date}
