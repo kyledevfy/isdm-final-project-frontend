@@ -17,16 +17,15 @@ const SettingsUsersTable = (props) => {
           {data.confirmed.toString()}
         </td>
         <td className="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
-          <a
-            href="#"
-            className="text-blue-600 hover:text-blue-900"
+          <p
+            className="text-blue-600 hover:text-blue-900 cursor-pointer"
             onClick={() => {
               props.setToggleEditModal(true);
               props.setUserEditId(data.id);
             }}
           >
             Edit
-          </a>
+          </p>
         </td>
       </tr>
     );
