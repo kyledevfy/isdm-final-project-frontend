@@ -11,6 +11,7 @@ import InactiveEmployees from "./employees/inactiveEmployees";
 import Home from "./home/home";
 import Login from "./login/login";
 import Settings from "./settings/settings";
+import { useSelector } from "react-redux";
 
 const Main = () => {
   const [sidebarActive, setSidebarActive] = useState(true);
@@ -20,6 +21,7 @@ const Main = () => {
   const dateNow = new Date();
   const [date, setDate] = useState([dateNow, dateNow]);
   const dispatch = useDispatch();
+  const loginStatus = useSelector((state) => state.loginStatus.value);
 
   const loadState = async () => {
     if (
@@ -33,6 +35,8 @@ const Main = () => {
       }
     }
   };
+
+  // const loadEmployees = () => {}
 
   useEffect(() => {
     loadState();

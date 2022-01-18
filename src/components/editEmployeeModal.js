@@ -41,10 +41,10 @@ const EditEmployeeModal = (props) => {
     if (response.success) {
       setMsgColor("green");
       setSuccessMessage("Employee edited successfully");
-      const employees = await getEmployees();
-      if (employees.success) {
-        dispatch(loadEmployees(employees.data));
-      }
+      // const employees = await getEmployees();
+      // if (employees.success) {
+      //   dispatch(loadEmployees(employees.data));
+      // }
     } else {
       setMsgColor("red");
       setSuccessMessage("An error occurred in editing employee");

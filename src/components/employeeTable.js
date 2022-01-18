@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 const EmployeeTable = (props) => {
   const employees = useSelector((state) => state.employees.value);
-
+  console.log(employees);
   const TableRow = ({ data }) => {
     const rowData = data.attributes;
     return (
@@ -25,16 +25,15 @@ const EmployeeTable = (props) => {
           {rowData.status ? "Active" : "Inactive"}
         </td>
         <td className="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
-          <a
-            href="#"
-            className="text-blue-600 hover:text-blue-900"
+          <p
+            className="text-blue-600 hover:text-blue-900 cursor-pointer"
             onClick={() => {
               props.setToggleEditModal(true);
               props.setEditId(data.id);
             }}
           >
             Edit
-          </a>
+          </p>
         </td>
       </tr>
     );

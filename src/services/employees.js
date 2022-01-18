@@ -12,7 +12,7 @@ export async function generateEmployeeId() {
 export async function getEmployees() {
   try {
     const response = await api({
-      url: "/employees",
+      url: "/employees?sort=id:asc",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("cesJwt"),
       },

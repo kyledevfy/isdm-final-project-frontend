@@ -29,10 +29,10 @@ const AddEmployeeModal = (props) => {
     if (newEmployee.success) {
       setMsgColor("green");
       setSuccessMessage("New employee added successfully");
-      const employees = await getEmployees();
-      if (employees.success) {
-        dispatch(loadEmployees(employees.data));
-      }
+      // const employees = await getEmployees();
+      // if (employees.success) {
+      //   dispatch(loadEmployees(employees.data));
+      // }
     } else {
       setMsgColor("red");
       setSuccessMessage("An error occurred in adding new employee");
