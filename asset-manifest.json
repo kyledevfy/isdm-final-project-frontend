@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/isdm-final-project-frontend/static/css/main.642b9d6e.css",
+    "main.js": "/isdm-final-project-frontend/static/js/main.402ebccb.js",
+    "static/js/787.3ae5ae75.chunk.js": "/isdm-final-project-frontend/static/js/787.3ae5ae75.chunk.js",
+    "static/media/logo.jpg": "/isdm-final-project-frontend/static/media/logo.b143b9a14966630e0a8b.jpg",
+    "index.html": "/isdm-final-project-frontend/index.html",
+    "main.642b9d6e.css.map": "/isdm-final-project-frontend/static/css/main.642b9d6e.css.map",
+    "main.402ebccb.js.map": "/isdm-final-project-frontend/static/js/main.402ebccb.js.map",
+    "787.3ae5ae75.chunk.js.map": "/isdm-final-project-frontend/static/js/787.3ae5ae75.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.642b9d6e.css",
+    "static/js/main.402ebccb.js"
+  ]
+}
