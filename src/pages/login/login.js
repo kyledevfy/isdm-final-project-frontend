@@ -69,8 +69,7 @@ const Login = () => {
                   className="h-5 w-5 text-gray-400"
                   fill="none"
                   viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
+                  stroke="currentColor">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -83,6 +82,7 @@ const Login = () => {
                   type="email"
                   placeholder="Email Address"
                   ref={emailRef}
+                  value="johndoe@gmail.com"
                   required
                 />
               </div>
@@ -91,8 +91,7 @@ const Login = () => {
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-5 w-5 text-gray-400"
                   viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
+                  fill="currentColor">
                   <path
                     fillRule="evenodd"
                     d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
@@ -104,6 +103,7 @@ const Login = () => {
                   type="password"
                   placeholder="Password"
                   ref={passwordRef}
+                  value="johnjohn"
                   required
                 />
               </div>
@@ -113,8 +113,7 @@ const Login = () => {
               <button
                 type="submit"
                 className="text-white w-full bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-md px-5 py-2.5 text-center mr-2 mb-2"
-                disabled={loading}
-              >
+                disabled={loading}>
                 {loading ? "Loading..." : "Login"}
               </button>
 
